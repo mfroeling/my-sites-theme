@@ -8,7 +8,7 @@
 {% assign src = no_tags | split: '{{' %}
 {% capture no_vars %}{% for part in src %}{% if forloop.first %}{{ part }}{% else %}{% assign rest = part | split: var_close %}{% for seg in rest offset: 1 %}{{ seg }}{% endfor %}{% endif %}{% endfor %}{% endcapture %}
 {% assign excerpt = no_vars | markdownify | replace: '</', ' </' | newline_to_br | replace: '<br />', ' ' | strip_html | strip_newlines | strip | truncate: 160 %}
-{% capture description %}{% if page.meta_description %}{{ page.meta_description }}{% elsif excerpt.size > 60 %}{{ excerpt }}{% elsif page.teaser %}{{ page.teaser }}{% else %}{{ site.description }}{% endif %}{% endcapture %}
+{% capture description %}{% if page.meta_description %}{{ page.meta_description }}{% elsif excerpt.size > 60 %}{{ excerpt }}{% elsif page.teaser %}{{ page.teaser }}{% elsif page.title and page.url != '/' %}{{ page.title }}. {{ site.description | strip_newlines | strip | truncate: 100 }}{% else %}{{ site.description }}{% endif %}{% endcapture %}
 {% assign description = description | strip_html | strip_newlines | strip | escape %}
 {% capture title %}{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}{% endcapture %}
 {% assign title = title | strip_html | strip_newlines | strip | escape %}
