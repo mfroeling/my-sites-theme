@@ -124,7 +124,7 @@ table { display: block; overflow-x: auto; max-width: 100%; }
 .button.small { padding: .3em .9em; font-size: .85rem; }
 
 /* gallery with a lightbox (no JavaScript) */
-.gallery { list-style: none; margin: 1.5rem 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr)); gap: 1rem; }
+.gallery { list-style: none; margin: 1.5rem 0; padding: 0; display: grid; grid-template-columns: repeat(var(--gallery-columns, 4), 1fr); gap: 1rem; }
 .gallery img { display: block; width: 100%; border-radius: 4px; }
 .gallery-label { display: block; margin-top: .3rem; font-size: .85rem; }
 .lightbox { display: none; position: fixed; inset: 0; z-index: 50; background: rgba(0, 0, 0, .88); align-items: center; justify-content: center; }
@@ -142,3 +142,5 @@ table { display: block; overflow-x: auto; max-width: 100%; }
 .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); gap: .8rem; margin: 1rem 0; }
 .icon-grid-item { text-align: center; text-decoration: none; font-size: .85rem; }
 .icon-grid-item img { display: block; max-width: 100%; height: auto; margin: 0 auto .2rem; }
+
+@media (max-width: 40rem) { .gallery { grid-template-columns: repeat(2, 1fr); } }

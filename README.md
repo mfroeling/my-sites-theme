@@ -86,6 +86,7 @@ theme_colors:                # optional, override the default colours
   bar: "#1f2933"
   banner_from: "#006687"
   banner_to: "#0b3a4d"
+  gallery_columns: 4        # thumbnails per row in the gallery (default 4, 2 on small screens)
 
 jsonld:                      # optional extra structured data for the home page
   "@context": https://schema.org
