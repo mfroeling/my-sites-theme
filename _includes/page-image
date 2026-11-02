@@ -1,6 +1,7 @@
 {% comment %}
   Show the image(s) in page.images with a matching image_id.
   Example: {% include page-image im_id='flow' %}
+  An image can set image_width (for example '50%') in its images: entry to be shown smaller or larger than the default.
   Optional settings in the site's _config.yml:
     page_image_link: false   do not link the image to the full size file (default: linked)
     webp_images: true        use name.webp (instead of name.png/.jpg) when that file exists
@@ -10,11 +11,11 @@
 {% for item in items %}
 {% assign name = item.image_name | replace: '\', '/' %}
 {% assign ext = name | split: '.' | last | downcase %}
-{% capture tag %}<img src="{{ site.urlimg }}{{ name }}"{% if item.image_title %} title="{{ item.image_title | escape_once }}"{% endif %}{% if item.image_alt %} alt="{{ item.image_alt | escape_once }}"{% endif %} loading="lazy">{% endcapture %}
+{% capture tag %}<img src="{{ site.urlimg }}{{ name }}"{% if item.image_title %} title="{{ item.image_title | escape_once }}"{% endif %}{% if item.image_alt %} alt="{{ item.image_alt | escape_once }}"{% endif %}{% if item.image_width %} style="width: {{ item.image_width | escape_once }}; max-width: 100%"{% endif %} loading="lazy">{% endcapture %}
 <figure class="page-image">
 {% if ext == 'gif' and site.gif_as_video %}
   {% assign base = name | replace: '.gif', '' | replace: '.GIF', '' %}
-  <video autoplay loop muted playsinline{% if item.image_title %} title="{{ item.image_title | escape_once }}"{% endif %}{% if item.image_alt %} aria-label="{{ item.image_alt | escape_once }}"{% endif %}>
+  <video autoplay loop muted playsinline{% if item.image_width %} style="width: {{ item.image_width | escape_once }}; max-width: 100%"{% endif %}{% if item.image_title %} title="{{ item.image_title | escape_once }}"{% endif %}{% if item.image_alt %} aria-label="{{ item.image_alt | escape_once }}"{% endif %}>
     <source src="{{ site.urlimg }}{{ base }}.webm" type="video/webm">
     <source src="{{ site.urlimg }}{{ base }}.mp4" type="video/mp4">
     {{ tag }}
