@@ -3,7 +3,7 @@
   Example: {% include list-research tag='research' grp='metabolic' %}
 {% endcomment %}
 <ul class="page-list">
-{% for p in site.pages %}{% if p.tags contains include.tag and p.tags contains include.grp %}
+{% for p in site.pages %}{% assign ptags = p.tags | join: ',' | split: ',' %}{% if ptags contains include.tag and ptags contains include.grp %}
   <li><a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a></li>
 {% endif %}{% endfor %}
 </ul>

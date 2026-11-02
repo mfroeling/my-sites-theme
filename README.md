@@ -44,11 +44,15 @@ Layouts: `default`, `page`, `frontpage`, `redirect`.
 | --- | --- |
 | `_includes/page-image` | `{% include page-image im_id='x' %}` shows the image with that `image_id` from the page's `images:` front matter, linked to the full size |
 | `_includes/page-images` | `{% include page-images %}` shows all images in `images:` |
+| `_includes/list-progress` | `{% include list-progress tag='x' %}` shows a grid of icons (the `icon:` file in each page's front matter) with the page title, for all pages with that tag |
+| `_includes/list-research` | `{% include list-research tag='x' grp='y' %}` lists the pages that have both tags |
+| `_includes/gallery` | `{% include gallery %}` thumbnail grid with a lightbox (no JavaScript) from the page's `gallery:` list (`image_url`, `caption`, `title`, optional `name`, `year`, `link`). The thumbnail of `a/b.jpg` must be `a/b-thumb.jpg` |
 | `_includes/list-pages` | `{% include list-pages tag='x' %}` lists the pages with that tag |
 | `_includes/_google_search` | simple Google site search box (used on the 404 page) |
 | `_includes/sitemap_collection.xml` | used by the site's `sitemap.xml` page |
 
 Page front matter: `title`, `subheadline`, `teaser`, `permalink`, `images`, `tags`, `meta_description` (optional, otherwise the first words of the page), `noindex: true`, `skip_boilerplate: true`.
+Banner: `header: image_fullwidth: "banners/x.png"` shows a photo banner with the logo over it (file in `urlimg`); `header: title: "Text"` a text banner.
 Front page (`layout: frontpage`): `widget1`, `widget2`, `widget3` (each `title`, `url`, `image`, `text`) and optional `callforaction` (`text`, `url`).
 Redirect pages: `layout: redirect`, `permalink: /old/`, `redirect_to: /new/`, `sitemap: false`.
 
@@ -70,6 +74,10 @@ credits: '<p>Website by ...</p>'
 google_analytics_tracking_id: G-XXXXXXX   # optional
 og_image: share.png          # optional, file in urlimg, used for link previews
 custom_css: /assets/css/custom.css        # optional, extra site specific CSS
+nav_first: true                           # optional, menu above the banner (default: banner first)
+page_image_link: false                    # optional, do not link page images to the full size file
+webp_images: true                         # optional, page-image uses name.webp instead of .png/.jpg when it exists
+gif_as_video: true                        # optional, page-image shows name.gif as video when name.webm/.mp4 exist
 
 theme_colors:                # optional, override the default colours
   accent: "#008cba"

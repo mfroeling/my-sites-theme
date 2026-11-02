@@ -1,0 +1,12 @@
+{% comment %}
+  A grid of icons with the page title for all pages with the given tag. Each page needs an icon: in its front matter
+  (a file in urlimg). Example: {% include list-progress tag='motion' %}
+{% endcomment %}
+<div class="icon-grid">
+{% for p in site.pages %}{% assign ptags = p.tags | join: ',' | split: ',' %}{% if ptags contains include.tag %}
+  <a class="icon-grid-item" href="{{ site.baseurl }}{{ p.url }}">
+    <img src="{{ site.urlimg }}{{ p.icon }}" alt="{{ p.title | escape_once }}" loading="lazy">
+    <span>{{ p.title }}</span>
+  </a>
+{% endif %}{% endfor %}
+</div>

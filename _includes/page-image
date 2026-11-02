@@ -1,10 +1,33 @@
 {% comment %}
-  Show the image(s) in page.images with a matching image_id, linked to the full size.
+  Show the image(s) in page.images with a matching image_id.
   Example: {% include page-image im_id='flow' %}
+  Optional settings in the site's _config.yml:
+    page_image_link: false   do not link the image to the full size file (default: linked)
+    webp_images: true        use name.webp (instead of name.png/.jpg) when that file exists
+    gif_as_video: true       show name.gif as a looping video when name.webm / name.mp4 exist
 {% endcomment %}
 {% assign items = page.images | where: "image_id", include.im_id %}
 {% for item in items %}
+{% assign name = item.image_name | replace: '\', '/' %}
+{% assign ext = name | split: '.' | last | downcase %}
+{% capture tag %}<img src="{{ site.urlimg }}{{ name }}"{% if item.image_title %} title="{{ item.image_title | escape_once }}"{% endif %}{% if item.image_alt %} alt="{{ item.image_alt | escape_once }}"{% endif %} loading="lazy">{% endcapture %}
 <figure class="page-image">
-  <a href="{{ site.urlimg }}{{ item.image_name }}" target="_blank" rel="noopener"><img src="{{ site.urlimg }}{{ item.image_name }}"{% if item.image_title %} title="{{ item.image_title }}"{% endif %}{% if item.image_alt %} alt="{{ item.image_alt }}"{% endif %}></a>
+{% if ext == 'gif' and site.gif_as_video %}
+  {% assign base = name | replace: '.gif', '' | replace: '.GIF', '' %}
+  <video autoplay loop muted playsinline{% if item.image_title %} title="{{ item.image_title | escape_once }}"{% endif %}{% if item.image_alt %} aria-label="{{ item.image_alt | escape_once }}"{% endif %}>
+    <source src="{{ site.urlimg }}{{ base }}.webm" type="video/webm">
+    <source src="{{ site.urlimg }}{{ base }}.mp4" type="video/mp4">
+    {{ tag }}
+  </video>
+{% else %}
+  {% assign picture = tag %}
+  {% if site.webp_images %}
+    {% assign webp = name | replace: '.png', '.webp' | replace: '.jpg', '.webp' %}
+    {% capture webp_url %}{{ site.urlimg }}{{ webp }}{% endcapture %}
+    {% assign has_webp = site.static_files | where: "path", webp_url | first %}
+    {% if has_webp and webp != name %}{% capture picture %}<picture><source srcset="{{ webp_url | replace: ' ', '%20' }}" type="image/webp">{{ tag }}</picture>{% endcapture %}{% endif %}
+  {% endif %}
+  {% if site.page_image_link == false %}{{ picture }}{% else %}<a href="{{ site.urlimg }}{{ name }}" target="_blank" rel="noopener">{{ picture }}</a>{% endif %}
+{% endif %}
 </figure>
 {% endfor %}

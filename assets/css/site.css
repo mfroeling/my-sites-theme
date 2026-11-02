@@ -63,7 +63,7 @@ article > header h1 { margin-bottom: .1em; }
 
 /* images and lists */
 .page-image { margin: 1.5rem 0; text-align: center; }
-.page-image img { max-width: 90%; }
+.page-image img, .page-image video { max-width: 90%; height: auto; }
 .page-list { padding-left: 1.2rem; }
 
 /* front page */
@@ -137,3 +137,8 @@ table { display: block; overflow-x: auto; max-width: 100%; }
 .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); padding: 1rem; font-size: 3rem; line-height: 1; }
 .lightbox-prev { left: .5rem; }
 .lightbox-next { right: .5rem; }
+
+/* icon grid (list-progress) */
+.icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); gap: .8rem; margin: 1rem 0; }
+.icon-grid-item { text-align: center; text-decoration: none; font-size: .85rem; }
+.icon-grid-item img { display: block; max-width: 100%; height: auto; margin: 0 auto .2rem; }
