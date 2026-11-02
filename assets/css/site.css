@@ -94,3 +94,7 @@ button.button { border: 0; font: inherit; cursor: pointer; }
 .skip-link { position: absolute; left: -999px; top: 0; z-index: 20; padding: .5rem 1rem; background: #fff; color: var(--text); }
 .skip-link:focus { left: 0; }
 table { display: block; overflow-x: auto; max-width: 100%; }
+
+/* site search box (404 page) */
+#search input { display: block; width: 100%; max-width: 24rem; padding: .6rem .7rem; font: inherit; color: var(--text); background: #fff; border: 1px solid #b8c0c8; border-radius: 4px; }
+#search input:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
