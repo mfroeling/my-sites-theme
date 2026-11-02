@@ -13,7 +13,9 @@
 <ul class="gallery">
 {% for item in page.gallery %}
   {% assign url = item.image_url | replace: '\', '/' %}
-  {% assign thumb = url | replace_last: '.', '-thumb.' %}
+  {% assign ext = url | split: '.' | last %}
+  {% assign stem_size = url.size | minus: ext.size | minus: 1 %}
+  {% assign thumb = url | slice: 0, stem_size | append: '-thumb.' | append: ext %}
   <li>
     <a href="#photo-{{ forloop.index }}"><img src="{{ site.urlimg }}{{ thumb }}" alt="{{ item.caption | escape }}"{% if item.title %} title="{{ item.title | escape }}"{% endif %} loading="lazy"></a>
     {% if item.name %}<span class="gallery-label">{% if item.link %}<a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.name }}{% if item.year %} - {{ item.year }}{% endif %}</a>{% else %}{{ item.name }}{% if item.year %} - {{ item.year }}{% endif %}{% endif %}</span>{% endif %}

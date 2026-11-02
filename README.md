@@ -9,7 +9,7 @@ A small shared Jekyll theme (plain CSS, no JavaScript, no Sass) for the QMRITool
 `Gemfile`:
 
 ```ruby
-gem "my-sites-theme", github: "mfroeling/my-sites-theme"
+gem "my-sites-theme", github: "mfroeling/my-sites-theme", branch: "main"
 ```
 
 `_config.yml`:
@@ -23,13 +23,13 @@ The site's `Gemfile.lock` pins the exact theme version, so a theme change never 
 
 ### Develop the theme and a site together
 
-Point bundler at your local checkout, so you do not have to push after each edit (the site must use the same branch name):
+Point bundler at your local checkout, so you do not have to push after each edit. This needs `branch: "main"` in the Gemfile line above:
 
 ```
-bundle config set local.my-sites-theme D:/werk/workspace/my-sites-theme
+bundle config set --local local.my-sites-theme D:/werk/workspace/my-sites-theme
 ```
 
-Undo with `bundle config unset local.my-sites-theme`.
+Commit your theme changes first (bundler records the local commit in `Gemfile.lock`). Undo with `bundle config unset --local local.my-sites-theme`, then push the theme and run `bundle update my-sites-theme` in the site.
 
 ## Override anything
 
