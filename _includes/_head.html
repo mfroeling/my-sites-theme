@@ -17,7 +17,7 @@
 <meta property="og:url" content="{{ url }}{{ page.url }}">
 <meta property="og:site_name" content="{{ site.title }}">
 <meta property="og:type" content="website">
-{% if site.og_image %}<meta property="og:image" content="{{ url }}{{ site.urlimg }}{{ site.og_image }}">{% endif %}
+{% if site.og_image and site.og_image != '' %}<meta property="og:image" content="{{ url }}{{ site.urlimg }}{{ site.og_image }}">{% endif %}
 <meta name="twitter:card" content="summary">
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/site.css">
 {% include _favicon.html %}
