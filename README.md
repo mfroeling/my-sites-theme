@@ -75,6 +75,7 @@ google_analytics_tracking_id: G-XXXXXXX   # optional
 og_image: share.png          # optional, file in urlimg, used for link previews
 custom_css: /assets/css/custom.css        # optional, extra site specific CSS
 nav_first: true                           # optional, menu above the banner (default: banner first)
+description_from_content: false           # optional, do not build the meta description from the first words of each page (use title + site description)
 page_image_link: false                    # optional, do not link page images to the full size file
 webp_images: true                         # optional, page-image uses name.webp instead of .png/.jpg when it exists
 gif_as_video: true                        # optional, page-image shows name.gif as video when name.webm/.mp4 exist
