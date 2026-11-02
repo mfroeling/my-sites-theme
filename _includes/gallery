@@ -1,0 +1,34 @@
+{% comment %}
+  Thumbnail gallery with a lightbox, no JavaScript (the :target selector shows the large image).
+  Front matter:
+    gallery:
+      - image_url: folder/photo.jpg      the large image; the thumbnail must be folder/photo-thumb.jpg
+        caption: "text under the large image"
+        title: "tooltip"
+        name: "optional text under the thumbnail"   (with link: makes it a link, year: is added)
+        link: "https://..."
+        year: "2012"
+  Use: {% include gallery %}
+{% endcomment %}
+<ul class="gallery">
+{% for item in page.gallery %}
+  {% assign url = item.image_url | replace: '\', '/' %}
+  {% assign thumb = url | replace_last: '.', '-thumb.' %}
+  <li>
+    <a href="#photo-{{ forloop.index }}"><img src="{{ site.urlimg }}{{ thumb }}" alt="{{ item.caption | escape }}"{% if item.title %} title="{{ item.title | escape }}"{% endif %} loading="lazy"></a>
+    {% if item.name %}<span class="gallery-label">{% if item.link %}<a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.name }}{% if item.year %} - {{ item.year }}{% endif %}</a>{% else %}{{ item.name }}{% if item.year %} - {{ item.year }}{% endif %}{% endif %}</span>{% endif %}
+  </li>
+{% endfor %}
+</ul>
+{% for item in page.gallery %}
+{% assign url = item.image_url | replace: '\', '/' %}
+<div class="lightbox" id="photo-{{ forloop.index }}">
+  <a class="lightbox-close" href="#_" aria-label="Close">&times;</a>
+  <figure>
+    <img src="{{ site.urlimg }}{{ url }}" alt="{{ item.caption | escape }}" loading="lazy">
+    {% if item.caption %}<figcaption>{{ item.caption }}</figcaption>{% endif %}
+  </figure>
+  {% unless forloop.first %}<a class="lightbox-nav lightbox-prev" href="#photo-{{ forloop.index | minus: 1 }}" aria-label="Previous">&lsaquo;</a>{% endunless %}
+  {% unless forloop.last %}<a class="lightbox-nav lightbox-next" href="#photo-{{ forloop.index | plus: 1 }}" aria-label="Next">&rsaquo;</a>{% endunless %}
+</div>
+{% endfor %}

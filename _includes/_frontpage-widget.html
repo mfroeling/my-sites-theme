@@ -8,4 +8,5 @@
   {% if w.image %}<a href="{{ href }}"><img src="{{ img }}" alt=""></a>{% endif %}
   <h2>{% if href %}<a href="{{ href }}">{{ w.title }}</a>{% else %}{{ w.title }}{% endif %}</h2>
   {% if w.text %}<p>{{ w.text }}</p>{% endif %}
+  {% if href %}<p><a class="button small" href="{{ href }}">{{ site.data.language.more | default: 'More' }}</a></p>{% endif %}
 </section>

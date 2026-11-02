@@ -1,0 +1,5 @@
+{% comment %}
+  Kept so existing pages keep working: the thesis gallery is the normal gallery
+  with name, year and link set per item. Use: {% include gallery_thesis %}
+{% endcomment %}
+{% include gallery %}

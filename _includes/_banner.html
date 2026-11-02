@@ -1,0 +1,30 @@
+{% comment %}
+  The banner with the logo. Chosen per page with front matter:
+    header:
+      image_fullwidth: "banners/x.png"     photo banner (file in urlimg), logo laid over it
+    header:
+      title: "Text"                        text banner
+      background-color: "#036"             optional colour for the text banner
+      caption: "Photo credit"              optional small caption under the banner (caption_url optional)
+  Without header the default banner (gradient from theme_colors) is used.
+{% endcomment %}
+{% if page.header.image_fullwidth %}
+<div class="brand brand-image" style="background-image: url('{{ site.baseurl }}{{ site.urlimg }}{{ page.header.image_fullwidth }}')">
+  <a class="logo" href="{{ site.baseurl }}/" title="{{ site.title }} – {{ site.slogan }}">
+    <img src="{{ site.baseurl }}{{ site.urlimg }}{{ site.logo }}" alt="{{ site.title }}">
+  </a>
+</div>
+{% elsif page.header.title %}
+<div class="brand brand-text"{% if page.header.background-color %} style="background: {{ page.header.background-color }}"{% endif %}>
+  <div class="brand-title">{{ page.header.title }}</div>
+</div>
+{% else %}
+<div class="brand">
+  <a class="logo" href="{{ site.baseurl }}/" title="{{ site.title }} – {{ site.slogan }}">
+    <img src="{{ site.baseurl }}{{ site.urlimg }}{{ site.logo }}" alt="{{ site.title }}">
+  </a>
+</div>
+{% endif %}
+{% if page.header.caption %}
+<p class="banner-caption">{% if page.header.caption_url %}<a href="{{ page.header.caption_url }}">{{ page.header.caption }}</a>{% else %}{{ page.header.caption }}{% endif %}</p>
+{% endif %}
