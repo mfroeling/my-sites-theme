@@ -12,6 +12,8 @@
   --banner-to: #0b3a4d;
   --bar-hover: rgba(255, 255, 255, .15);
   --bar-active: rgba(255, 255, 255, .22);
+  --bar-hover-text: var(--bar-text);
+  --bar-active-text: var(--bar-text);
   --footer-bg: var(--banner-to);
   --footer-text: #cbd2d9;
   --footer-link: #fff;
@@ -56,7 +58,7 @@ article > header h1 { margin-bottom: .1em; }
 .menu { display: flex; flex-wrap: wrap; gap: .25rem; }
 .menu > li { position: relative; }
 .menu a { display: block; padding: .5rem .8rem; color: var(--bar-text); text-decoration: none; }
-.menu > li:hover > a, .menu > li:focus-within > a { background: var(--bar-hover); }
+.menu > li:hover > a, .menu > li:focus-within > a { background: var(--bar-hover); color: var(--bar-hover-text); }
 .dropdown { display: none; position: absolute; z-index: 10; left: 0; top: 100%; min-width: 17rem; background: var(--bar); box-shadow: 0 4px 10px rgba(0, 0, 0, .3); }
 .menu li:hover > .dropdown, .menu li:focus-within > .dropdown { display: block; }
 .dropdown a:hover, .dropdown a:focus { background: var(--bar-hover); }
@@ -95,7 +97,7 @@ button.button { border: 0; font: inherit; cursor: pointer; }
 .hidden { display: none; }
 
 /* menu: current section */
-.menu > li.active > a { background: var(--bar-active); }
+.menu > li.active > a { background: var(--bar-active); color: var(--bar-active-text); }
 
 /* accessibility and small screens */
 .skip-link { position: absolute; left: -999px; top: 0; z-index: 20; padding: .5rem 1rem; background: #fff; color: var(--text); }

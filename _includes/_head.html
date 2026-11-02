@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/site.css">
 {% include _favicon.html %}
 {% if site.theme_colors %}<style>:root { {% for c in site.theme_colors %}--{{ c[0] | replace: '_', '-' }}: {{ c[1] }}; {% endfor %}}</style>{% endif %}
+{% if page.style %}<style>{{ page.style }}</style>{% endif %}
 {% if site.custom_css %}<link rel="stylesheet" href="{{ site.baseurl }}{{ site.custom_css }}">{% endif %}
 {% comment %} Structured data (schema.org JSON-LD). Site specific extras go in _config.yml under jsonld. {% endcomment %}
 {% assign ld_desc = site.description | strip_newlines | strip %}

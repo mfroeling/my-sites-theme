@@ -18,7 +18,7 @@
 <div class="brand brand-text"{% if page.header.background-color %} style="background: {{ page.header.background-color }}"{% endif %}>
   <div class="brand-title">{{ page.header.title }}</div>
 </div>
-{% else %}
+{% elsif site.default_banner != false %}
 <div class="brand">
   <a class="logo" href="{{ site.baseurl }}/" title="{{ site.title }} – {{ site.slogan }}">
     <img src="{{ site.baseurl }}{{ site.urlimg }}{{ site.logo }}" alt="{{ site.title }}">

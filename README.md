@@ -51,7 +51,7 @@ Layouts: `default`, `page`, `frontpage`, `redirect`.
 | `_includes/_google_search` | simple Google site search box (used on the 404 page) |
 | `_includes/sitemap_collection.xml` | used by the site's `sitemap.xml` page |
 
-Page front matter: `title`, `subheadline`, `teaser`, `permalink`, `images`, `tags`, `meta_description` (optional, otherwise the first words of the page), `noindex: true`, `skip_boilerplate: true`.
+Page front matter: `style` (extra CSS for that page only), `title`, `subheadline`, `teaser`, `permalink`, `images`, `tags`, `meta_description` (optional, otherwise the first words of the page), `noindex: true`, `skip_boilerplate: true`.
 Banner: `header: image_fullwidth: "banners/x.png"` shows a photo banner with the logo over it (file in `urlimg`); `header: title: "Text"` a text banner.
 Front page (`layout: frontpage`): `widget1`, `widget2`, `widget3` (each `title`, `url`, `image`, `text`) and optional `callforaction` (`text`, `url`).
 Redirect pages: `layout: redirect`, `permalink: /old/`, `redirect_to: /new/`, `sitemap: false`.
@@ -75,6 +75,8 @@ google_analytics_tracking_id: G-XXXXXXX   # optional
 og_image: share.png          # optional, file in urlimg, used for link previews
 custom_css: /assets/css/custom.css        # optional, extra site specific CSS
 nav_first: true                           # optional, menu above the banner (default: banner first)
+default_banner: false                     # optional, no logo banner on pages without header.image_fullwidth / header.title
+about_url: /about/team/                   # optional, target of the More link in the footer (default /about/)
 description_from_content: false           # optional, do not build the meta description from the first words of each page (use title + site description)
 page_image_link: false                    # optional, do not link page images to the full size file
 webp_images: true                         # optional, page-image uses name.webp instead of .png/.jpg when it exists
@@ -86,6 +88,8 @@ theme_colors:                # optional, override the default colours
   bar: "#1f2933"
   banner_from: "#006687"
   banner_to: "#0b3a4d"
+  bar_hover_text: "#13355f"   # optional text colour of a hovered menu item (default: bar_text)
+  bar_active_text: "#13355f"  # optional text colour of the current menu item (default: bar_text)
   gallery_columns: 4        # thumbnails per row in the gallery (default 4, 2 on small screens)
 
 jsonld:                      # optional extra structured data for the home page
