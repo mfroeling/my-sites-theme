@@ -1,6 +1,11 @@
 {% assign url = site.baseurl | prepend: site.url %}
 {% comment %} Description: explicit meta_description, else the first words of the page, else teaser, else the site description. {% endcomment %}
-{% assign excerpt = page.content | markdownify | replace: '</', ' </' | newline_to_br | replace: '<br />', ' ' | strip_html | strip_newlines | strip | truncate: 160 %}
+{% comment %} page.content is the raw source, so remove the Liquid tags and variables before using it. {% endcomment %}
+{% assign src = page.content | split: '{%' %}
+{% capture no_tags %}{% for part in src %}{% if forloop.first %}{{ part }}{% else %}{% assign rest = part | split: '%}' %}{% for seg in rest offset: 1 %}{{ seg }}{% endfor %}{% endif %}{% endfor %}{% endcapture %}
+{% assign src = no_tags | split: '{{' %}
+{% capture no_vars %}{% for part in src %}{% if forloop.first %}{{ part }}{% else %}{% assign rest = part | split: '}}' %}{% for seg in rest offset: 1 %}{{ seg }}{% endfor %}{% endif %}{% endfor %}{% endcapture %}
+{% assign excerpt = no_vars | markdownify | replace: '</', ' </' | newline_to_br | replace: '<br />', ' ' | strip_html | strip_newlines | strip | truncate: 160 %}
 {% capture description %}{% if page.meta_description %}{{ page.meta_description }}{% elsif excerpt.size > 60 %}{{ excerpt }}{% elsif page.teaser %}{{ page.teaser }}{% else %}{{ site.description }}{% endif %}{% endcapture %}
 {% assign description = description | strip_html | strip_newlines | strip | escape %}
 {% capture title %}{% if page.meta_title %}{{ page.meta_title }}{% elsif page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}{% endcapture %}
